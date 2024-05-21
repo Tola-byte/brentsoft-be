@@ -1,11 +1,13 @@
 
 import mailTransport from "../config/mailConfig";
+import { config } from "dotenv";
+config();
 
 export const sendEmail = async (to: string, subject: string, text: string) => {
     const mailOptions = {
         from: process.env.MAIL_USER,
-        to: to,
-        subject: subject,
+        to: to || process.env.RECEIVER_MAIL,
+        subject: subject || 'EMAIL FROM USER',
         text: text
     };
 

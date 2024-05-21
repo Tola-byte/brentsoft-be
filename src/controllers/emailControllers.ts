@@ -1,11 +1,22 @@
 import { Request, Response } from 'express';
 import { sendEmail } from '../services/emailServices';
+import { handleSuccess } from '../utils/utils';
 
 export const sendEmailHandler = async (req: Request, res: Response) => {
-    const { to, subject, text } = req.body;
+    const { to, subject, text, ...restOfBody } = req.body;
+
+    // const textLoad = Object.keys(restOfBody)
+    const formattedTextLoad = Object.entries(restOfBody).map(([key, value])=> `${key}: ${value}`).join('\n')
+
+    let textLoad: string 
+
+      textLoad = text ? `{${formattedTextLoad}\n\nText:\n${text}}` : `{${formattedTextLoad}}`
+
     try {
-        await sendEmail(to, subject, text);
-        res.status(200).json({ message: "Email sent successfully" });
+        console.log(restOfBody, 'request body')
+        await sendEmail(to, subject, textLoad);
+        // res.status(200).json({ message: "Email sent successfully" });
+        handleSuccess({res, message: 'Email sent successfully'})
     } catch (error: any) {
         res.status(500).json({ message: "Failed to send email", error: error.message });
     }
