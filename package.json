@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "@types/nodemailer": "^6.4.15",
+    "express": "^4.19.2",
+    "nodemailer": "^6.9.13",
+    "typescript": "^5.4.5"
+  },
+  "scripts": {
+    "start": "nodemon server.ts"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "nodemon": "^3.1.0"
+  }
+}
