@@ -11,7 +11,7 @@ export const sendEmail = async (to: string, subject: string, text: string) => {
 
     try {
         const result = await mailTransport.sendMail(mailOptions);
-        console.log('Email sent:', result);
+        console.log('Email sent is: ', result);
         return result;
     } catch (error) {
         console.error('Failed to send email:', error);
